@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Personel | Oksijen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="panel">
+        <h1>GÜNLÜK OKSİJEN HESAPLAYICI</h1>
+        <nav>
+            <a href="kontrol.html">Sistem Kontrol</a> |
+            <a href="index.html">Çıkış Yap</a>
+        </nav>
+        <hr>
+
+        <p>Personel Rütbesini Seçin:</p>
+        <select id="rutbeSecim">
+            <option value="kaptan">Kaptan (Yoğun Stres)</option>
+            <option value="muhendis">Mühendis (Fiziksel Efor)</option>
+            <option value="bilim">Bilim İnsanı (Standart)</option>
+        </select>
+
+        <button onclick="oksijenHesapla()">Hesapla</button>
+
+        <h2 id="sonucAlani">Sonuç bekleniyor...</h2>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
+// 3. OKSİJEN HESAPLAYICI (Switch-Case ve Return Kullanımı)
+
+// Ana fonksiyon
+function oksijenHesapla() {
+    var rutbe = document.getElementById("rutbeSecim").value;
+    
+    // Yardımcı fonksiyona rütbeyi gönderip, dönen (return) sonucu alıyoruz.
+    var harcananLitre = litreBul(rutbe); 
+    
+    // Sonucu Ekrana Yazdırma
+    document.getElementById("sonucAlani").innerHTML = "Günlük Tüketim: " + harcananLitre + " Litre";
+}
+
+// Geriye Değer Döndüren Yardımcı Fonksiyon
+function litreBul(gelenRutbe) {
+    var litre = 0;
+
+    // Switch-Case yapısı: Bir değişkenin çok fazla ihtimali varsa If-Else yerine kullanılır.
+    switch (gelenRutbe) {
+        case "kaptan":
+            litre = 450; // Kaptan stresli, çok nefes alıyor :)
+            break; // İşlem bitince bloktan çık!
+        case "muhendis":
+            litre = 600; // Efor sarf ediyor
+            break;
+        case "bilim":
+            litre = 300; // Sakin sakin oturuyor
+            break;
+        default:
+            litre = 0; // Hiçbiri değilse
+    }
+    
+    // Hesaplanan değeri asıl fonksiyona GERİ DÖNDÜR (Return)
+    return litre;
+}
+
